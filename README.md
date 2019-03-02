@@ -202,6 +202,43 @@ game.onPaint(function () {
 })
 ```
 
+* https://twitter.com/fernandojsg/status/1101800243216244737
+
+```typescript
+// https://twitter.com/fernandojsg/status/1101800243216244737
+let p: { x: number; y: number; a: number; b: number; }[] = []
+let n = 48
+let w = 160
+const r = rnd;
+for (let i = 0; i <= n; ++i) {
+    p[i] = {
+        x: r(w),
+        y: r(w),
+        a: r(2) - 1,
+        b: r(2) - 1
+    }
+}
+game.onPaint(function () {
+    for (let i = 0; i <= n; ++i) {
+        let a = p[i];
+        let u = a.x;
+        let v = a.y;
+        a.x = (u + a.a) % w;
+        a.y = (v + a.b) % w;
+        for (let j = i; j <= n; ++j) {
+            let b = p[j];
+            let x = u - b.x;
+            let y = v - b.y;
+            let d = sqrt(x * x + y * y)
+            if (d < 20) {
+                line(u, v, b.x, b.y, d < 13 ? 12 : 1)
+            }
+        }
+        circ(u, v, 1, 7)
+    }
+})
+```
+
 ## License
 
 MIT

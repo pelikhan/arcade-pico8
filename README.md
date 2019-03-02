@@ -170,6 +170,38 @@ game.onPaint(function () {
 })
 ```
 
+* https://twitter.com/fernandojsg/status/1101471040188964864
+
+```typescript
+poke(0x5F2C, 3);
+let f: number[] = [];
+let p = [0, 1, 2, 4, 8, 9, 10, 7]
+let left = 0;
+let top = 80;
+let w = 160;
+let h = 60;
+let d = w * h;
+function s(t: number) {
+    const e = f[t];
+    const i = flr(rnd(3));
+    f[t - i + 1 - w] = e - band(i, 1)
+}
+for (let i = 0; i <= d; ++i) {
+    f[i] = (i > d - w) ? 8 : 0;
+}
+
+game.onPaint(function () {
+    for (let x = 0; x <= w; ++x) {
+        for (let y = 0; y <= h - 1; ++y) {
+            s(y * w + x)
+        }
+    }
+    for (let x = 0; x <= d; ++x) {
+        pset(left + x % w, top + flr(x / w), p[f[x]])
+    }
+})
+```
+
 ## License
 
 MIT

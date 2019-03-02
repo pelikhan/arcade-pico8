@@ -37,6 +37,14 @@ function fillp(n: number) {
     // TODO support for fill pattern in rendering
 }
 
+function poke(addr: number, val: number) {
+    // not supported
+}
+
+function band(first: number, second: number): number {
+    return first & second;
+}
+
 // runtime
 function range(start: number, end: number, stride: number = 1): number[] {
     const p = [];

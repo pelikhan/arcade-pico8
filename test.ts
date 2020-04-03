@@ -1,6 +1,5 @@
 // tests go here; this will not be compiled when this package is used as a library
 const c = [0, 1, 2, 8, 14, 15, 7]
-fillp(0xa5a5)
 const r = range(3, 68, .1);
 game.onPaint(function () {
     for (let w of r) {

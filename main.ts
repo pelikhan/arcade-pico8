@@ -22,13 +22,17 @@ ffccaa`;
 image.setPalette(pico8Palette);
 
 // draw state
-interface DrawState {
-    penColor?: number;
-    fillPattern?: number;
+class DrawState {
+    penColor: number;
+    fillPattern: number;
+    constructor() {
+        this.penColor = 12;
+        this.fillPattern = undefined;
+    }
 }
-const drawState: DrawState = {
-    penColor: 12
-};
+
+const drawState: DrawState = new DrawState();
+
 function color(c: number) {
     drawState.penColor = c;
 }

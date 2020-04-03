@@ -1,7 +1,8 @@
 // tests go here; this will not be compiled when this package is used as a library
 const c = [0, 1, 2, 8, 14, 15, 7]
 const r = range(3, 68, .1);
-game.onPaint(function () {
+
+paint(function () {
     for (let w of r) {
         const a = 4 / w + time() / 4;
         const k = 145 / w;

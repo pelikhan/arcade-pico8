@@ -15,7 +15,7 @@ to https://arcade.makecode.com .
 const c = [0, 1, 2, 8, 14, 15, 7]
 fillp(0xa5a5)
 const r = range(3, 68, .1);
-game.onPaint(function () {
+paint(function () {
     for (let w of r) {
         const a = 4 / w + time() / 4;
         const k = 145 / w;
@@ -38,7 +38,7 @@ const c = cos;
 let t = 0;
 const ir = range(-48, 48, 3);
 const jr = range(-48, 48, 3);
-game.onPaint(function () {
+paint(function () {
     t += 0.05;
     rectfill(16, 16, 112, 112, 2)
     for (const i of ir) {
@@ -62,7 +62,7 @@ function z(x: number, y: number, j: number, i: number) {
     return max(-1, 7 - sqrt((11 - x - sin(o * i) * 6) ^ 2 + (11 - y + cos(o * j) * 6) ^ 2))
 }
 
-game.onPaint(function () {
+paint(function () {
     for (let y = 0; y <= 23; ++y) {
         for (let x = 0; x <= 23; ++x) {
             let v = z(x, y, 7.1, 3.2) + z(x, y, 2.7, -5.3) + z(x, y, -3.5, 4.3)
@@ -79,7 +79,7 @@ game.onPaint(function () {
 let t = 0;
 const ir = range(-45, 45, 3);
 const jr = range(-45, 45, 3);
-game.onPaint(function () {
+paint(function () {
     t += .02
     for (let i of ir) {
         for (let j of jr) {
@@ -104,7 +104,7 @@ for (let i of range(-32, n))
     t.push({ x: i, y: 0, z: 0 });
 
 const ir = range(1, n);
-game.onPaint(function () {
+paint(function () {
     for (const i of ir) {
         const q = t[i];
         //let [x, y] = p(q.x, q.y, q.z)
@@ -130,10 +130,10 @@ function p(x: number, y: number, z: number): number[] {
 
 * https://twitter.com/jordi_ros/status/1099472557810634754
 
-```
+```typescript
 const yr = range(0, 23);
 const ir = range(0, 2);
-game.onPaint(function () {
+paint(function () {
     for (let y of yr) {
         for (let x of yr) {
             let v = -2;
@@ -162,7 +162,7 @@ for (let j of range(0, 23)) {
 }
 
 scene.setBackgroundColor(7);
-game.onPaint(function () {
+paint(function () {
     for (const k of p) {
         if (k.v < 3) k.v += .04; else k.v = -3;
         if (k.q < 3) k.q += .04; else k.q = -3;
@@ -194,7 +194,7 @@ for (let i = 0; i <= d; ++i) {
     f[i] = (i > d - w) ? 8 : 0;
 }
 
-game.onPaint(function () {
+paint(function () {
     for (let x = 0; x <= w; ++x) {
         for (let y = 0; y <= h - 1; ++y) {
             s(y * w + x)
@@ -222,7 +222,7 @@ for (let i = 0; i <= n; ++i) {
         b: r(2) - 1
     }
 }
-game.onPaint(function () {
+paint(function () {
     for (let i = 0; i <= n; ++i) {
         let a = p[i];
         let u = a.x;

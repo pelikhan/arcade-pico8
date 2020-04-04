@@ -172,7 +172,7 @@ function circfill(x: number, y: number, r: number = 4, col?: number) {
 function flip() {
     // not needed, it blits the screen
 }
-function paint(handler: () => void) {
+function draw(handler: () => void) {
     const ds = drawState();
     game.onPaint(handler);
 }

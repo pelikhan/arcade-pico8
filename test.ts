@@ -7,7 +7,7 @@ carts.push(function() {
     const f = (i: number) => {
         return c[flr(1.5 + abs(6 - i % 12))]
     }
-    paint(function () {
+    draw(function () {
         for (const w of r) {
             const a = 4 / w + time() / 4;
             const k = 145 / w;
@@ -26,7 +26,7 @@ carts.push(function() {
     let t = 0;
     const ir = range(-48, 48, 3);
     const jr = range(-48, 48, 3);
-    paint(function () {
+    draw(function () {
         t += 0.05;
         rectfill(16, 16, 112, 112, 2)
         for (const i of ir) {
@@ -48,7 +48,7 @@ carts.push(function() {
         const o = time() * .03 + j
         return max(-1, 7 - sqrt((11 - x - sin(o * i) * 6) ** 2 + (11 - y + cos(o * j) * 6) ** 2))
     }
-    paint(function () {
+    draw(function () {
         for (let y = 0; y <= 23; ++y) {
             for (let x = 0; x <= 23; ++x) {
                 let v = z(x, y, 7.1, 3.2) + z(x, y, 2.7, -5.3) + z(x, y, -3.5, 4.3)
@@ -65,7 +65,7 @@ carts.push(function() {
 let t = 0;
 const ir = range(-45, 45, 3);
 const jr = range(-45, 45, 3);
-paint(function () {
+draw(function () {
     t += .02
     for (let i of ir) {
         for (let j of jr) {
@@ -90,7 +90,7 @@ for (let i of range(-32, n))
     t.push({ x: i, y: 0, z: 0 });
 
 const ir = range(1, n);
-paint(function () {
+draw(function () {
     for (const i of ir) {
         const q = t[i];
         //let [x, y] = p(q.x, q.y, q.z)
@@ -119,7 +119,7 @@ function p(x: number, y: number, z: number): number[] {
 carts.push(function() {
 const yr = range(0, 23);
 const ir = range(0, 2);
-paint(function () {
+draw(function () {
     for (let y of yr) {
         for (let x of yr) {
             let v = -2;
@@ -147,7 +147,7 @@ for (let j of range(0, 23)) {
 }
 
 cls(7);
-paint(function () {
+draw(function () {
     for (const k of p) {
         if (k.v < 3) k.v += .04; else k.v = -3;
         if (k.q < 3) k.q += .04; else k.q = -3;
@@ -178,7 +178,7 @@ for (let i = 0; i <= d; ++i) {
     f[i] = (i > d - w) ? 8 : 0;
 }
 
-paint(function () {
+draw(function () {
     for (let x = 0; x <= w; ++x) {
         for (let y = 0; y <= h - 1; ++y) {
             s(y * w + x)
@@ -204,7 +204,7 @@ for (let i = 0; i <= n; ++i) {
         b: r(2) - 1
     }
 }
-paint(function () {
+draw(function () {
     for (let i = 0; i <= n; ++i) {
         let a = p[i];
         let u = a.x;

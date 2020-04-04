@@ -7,10 +7,6 @@
 A tiny compatibility layer to port the amazing Pico-8 #Tweetcarts
 to https://arcade.makecode.com .
 
-## APIs
-
-
-
 ## Examples
 
 * https://twitter.com/lucatron_/status/1096168653735657472

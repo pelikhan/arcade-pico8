@@ -1,8 +1,23 @@
 /**
 * (incomplete) pico8 API compat layer
 */
+// draw state
+class DrawState {
+    penColor: number;
+    fillPattern: number;
+    constructor() {
+        this.penColor = 12;
+        this.fillPattern = undefined;
+    }
+}
 
-const pico8Palette = hex
+function drawState(): DrawState {
+    const scene = game.currentScene();
+    let ds = scene.data["pico8state"] as DrawState;
+    if (!ds) {
+        ds = new DrawState();
+        scene.data["pico8state"] = ds;
+        image.setPalette(hex
     `000000 
 1d2b53
 7e2553 
@@ -18,26 +33,16 @@ ffec27
 29adff
 83769c
 ff77a8
-ffccaa`;
-image.setPalette(pico8Palette);
-
-// draw state
-class DrawState {
-    penColor: number;
-    fillPattern: number;
-    constructor() {
-        this.penColor = 12;
-        this.fillPattern = undefined;
+ffccaa`)
     }
+    return ds;
 }
-
-const drawState: DrawState = new DrawState();
 
 function color(c: number) {
-    drawState.penColor = c;
+    drawState().penColor = c;
 }
 function fillp(n: number) {
-    drawState.fillPattern = n;
+    drawState().fillPattern = n;
     // TODO support for fill pattern in rendering
 }
 
@@ -61,11 +66,11 @@ function time(): number {
 }
 
 // math
-function cos(n: number) {
-    return Math.cos(n);
+function cos(x: number) {
+    return Math.cos(x)
 }
-function sin(n: number) {
-    return Math.sin(n);
+function sin(x: number) {
+    return Math.sin(x)
 }
 function abs(n: number) {
     return Math.abs(n);
@@ -77,10 +82,10 @@ function sqrt(x: number): number {
     return Math.sqrt(x);
 }
 function max(x: number, y: number): number {
-    return Math.max(x, y);
+    return x > y ? x : y
 }
 function min(x: number, y: number): number {
-    return Math.min(x, y);
+    return x < y ? x : y
 }
 function atan2(dy: number, dx: number): number {
     return Math.atan2(dy, dx);
@@ -90,22 +95,27 @@ function rnd(max: number): number {
 }
 
 // drawing
+const XOFFSET = 16;
 function line(x0: number, y0: number, x1: number, y1: number, col?: number) {
-    if (col === undefined) col = drawState.penColor;
-    screen.drawLine(x0, y0, x1, y1, col);
+    const ds = drawState();
+    if (col === undefined) col = ds.penColor;
+    screen.drawLine(x0 + XOFFSET, y0, x1 + XOFFSET, y1, col);
 }
 function rect(x0: number, y0: number, x1: number, y1: number, col?: number) {
-    if (col === undefined) col = drawState.penColor;
-    screen.drawRect(x0, y0, Math.abs(x1 - x0), Math.abs(y1 - y0), col);
+    const ds = drawState();
+    if (col === undefined) col = ds.penColor;
+    screen.drawRect(x0 + XOFFSET, y0, Math.abs(x1 - x0), Math.abs(y1 - y0), col);
 }
 function rectfill(x0: number, y0: number, x1: number, y1: number, col?: number) {
-    if (col === undefined) col = drawState.penColor;
-    screen.fillRect(x0, y0, Math.abs(x1 - x0), Math.abs(y1 - y0), col);
+    const ds = drawState();
+    if (col === undefined) col = ds.penColor;
+    screen.fillRect(x0 + XOFFSET, y0, Math.abs(x1 - x0), Math.abs(y1 - y0), col);
 }
 function circ(x0: number, y0: number, radius: number = 4, col?: number) {
-    if (col === undefined) col = drawState.penColor;
+    const ds = drawState();
+    if (col === undefined) col = ds.penColor;
 
-    x0 = x0 | 0;
+    x0 = (x0 | 0) + XOFFSET;
     y0 = y0 | 0;
     radius = radius | 0;
 
@@ -134,12 +144,14 @@ function circ(x0: number, y0: number, radius: number = 4, col?: number) {
     }
 }
 function pset(x: number, y: number, col?: number) {
-    if (col === undefined) col = drawState.penColor;
-    screen.setPixel(x, y, col);
+    const ds = drawState();
+    if (col === undefined) col = ds.penColor;
+    screen.setPixel(x + XOFFSET, y, col);
 }
 
 function circfill(x: number, y: number, r: number = 4, col?: number) {
-    if (col === undefined) col = drawState.penColor;
+    const ds = drawState();
+    if (col === undefined) col = ds.penColor;
     // TODO
     circ(x, y, r, col);
 }
@@ -147,5 +159,6 @@ function flip() {
     // not needed, it blits the screen
 }
 function paint(handler: () => void) {
+    const ds = drawState();
     game.onPaint(handler);
 }

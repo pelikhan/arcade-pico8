@@ -146,7 +146,7 @@ for (let j of range(0, 23)) {
     }
 }
 
-scene.setBackgroundColor(7);
+cls(7);
 paint(function () {
     for (const k of p) {
         if (k.v < 3) k.v += .04; else k.v = -3;

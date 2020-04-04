@@ -38,9 +38,23 @@ ffccaa`)
     return ds;
 }
 
+/**
+ * Sets the background color of the scene.
+ */
+function cls(c: number) {
+    scene.setBackgroundColor(c);
+}
+
+/**
+ * Sets the current color in the drawing state
+ */
 function color(c: number) {
     drawState().penColor = c;
 }
+
+/**
+ * Sets the current fill pattern in the drawing state
+ */
 function fillp(n: number) {
     drawState().fillPattern = n;
     // TODO support for fill pattern in rendering
